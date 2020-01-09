@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { Commit } from "./Commit.jsx";
 
@@ -34,6 +34,9 @@ export const RepositoryInfo = () => {
             ))}
           </div>
         </div>
+        <button>
+          <Link to={"/"}>Back</Link>
+        </button>
       </div>
     );
   } else {
@@ -43,9 +46,7 @@ export const RepositoryInfo = () => {
           <h1>{repositoryname}</h1>
         </div>
         <div>
-          <div>
-            <h2>No commits were found</h2>
-          </div>
+          <h2>No commits were found</h2>
         </div>
       </div>
     );

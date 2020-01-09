@@ -39,6 +39,7 @@ export const Home = () => {
       });
   };
   if (hasError) {
+    //Incase there was an error and user was not found
     return (
       <div className="container">
         <form className="form-inline" onSubmit={getSearch}>
@@ -49,12 +50,13 @@ export const Home = () => {
             </button>
           </div>
         </form>
-        <h4>Error</h4>
+        <h4>GitHub profile was not found</h4>
       </div>
     );
   }
 
   if (query) {
+    //User was succesfully found
     return (
       <div className="container">
         <form className="form-inline" onSubmit={getSearch}>
@@ -73,6 +75,7 @@ export const Home = () => {
       </div>
     );
   } else {
+    //No query
     return (
       <div className="container">
         <form className="form-inline" onSubmit={getSearch}>
@@ -83,7 +86,7 @@ export const Home = () => {
             </button>
           </div>
         </form>
-        <h4>Use search</h4>
+        <h4>Begin the search by typing someone's GitHub profile name</h4>
       </div>
     );
   }

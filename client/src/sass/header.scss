@@ -1,0 +1,21 @@
+$header-img: url("../assets/bg-image.jpg");
+
+.jumbo {
+  background-image: $header-img;
+  background-size: cover;
+  color: #efefef;
+  height: 200px;
+  position: relative;
+  z-index: -2;
+  .overlay {
+    text-align: center;
+    h1 {
+      color: #fff;
+      text-shadow: 2px 2px rgba(175, 97, 97, 0.2);
+      font-size: 3em;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-family: "Roboto", sans-serif;
+    }
+  }
+}
