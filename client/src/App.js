@@ -1,13 +1,26 @@
-import React, { Fragment } from "react";
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch
+} from "react-router-dom";
 import "./sass/main.scss";
 
-//Components
 import { Home } from "./components/Home.jsx";
+import { RepositoryInfo } from "./components/RepositoryInfo.jsx";
 
 export const App = () => {
   return (
-    <Fragment>
-      <Home />
-    </Fragment>
+    <Router>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route
+          path="/repository/:owner/:repositoryname"
+          component={RepositoryInfo}
+        />
+        <Redirect to="/" />
+      </Switch>
+    </Router>
   );
 };
