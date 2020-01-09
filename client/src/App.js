@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -9,16 +9,21 @@ import "./sass/main.scss";
 
 import { Home } from "./components/Home.jsx";
 import { RepositoryInfo } from "./components/RepositoryInfo.jsx";
+import { QueryContext } from "./components/QueryContext";
 
 export const App = () => {
+  const [query, setQuery] = useState("");
+
   return (
     <Router>
       <Switch>
-        <Route path="/" exact component={Home} />
-        <Route
-          path="/repository/:owner/:repositoryname"
-          component={RepositoryInfo}
-        />
+        <QueryContext.Provider value={{ query, setQuery }}>
+          <Route path="/" exact component={Home} />
+          <Route
+            path="/repository/:owner/:repositoryname"
+            component={RepositoryInfo}
+          />
+        </QueryContext.Provider>
         <Redirect to="/" />
       </Switch>
     </Router>

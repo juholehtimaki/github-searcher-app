@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { Repository } from "./Repository";
+import { Repository } from "./Repository.jsx";
+import { QueryContext } from "./QueryContext.jsx";
 
 export const Home = () => {
   const [repos, setRepos] = useState([]);
-  const [search, setSearch] = useState();
-  const [query, setQuery] = useState("juholehtimaki");
+  const [search, setSearch] = useState("");
+  const [hasError, setHasError] = useState(false);
+  const { query, setQuery } = useContext(QueryContext);
 
   useEffect(() => {
-    getRepos();
+    if (query) {
+      getRepos();
+    }
   }, [query]);
 
   const updateSearch = e => {
@@ -27,26 +31,60 @@ export const Home = () => {
       .get(url)
       .then(res => {
         setRepos(res.data);
-        console.log(res.data);
+        setHasError(false);
       })
-      .catch(e => console.log(e));
+      .catch(e => {
+        console.log(e);
+        setHasError(true);
+      });
   };
-
-  return (
-    <div className="container">
-      <form className="form-inline" onSubmit={getSearch}>
-        <div className="form-group">
-          <input type="text" value={search} onChange={updateSearch} />
-          <button type="submit" className="btn btn-primary mb-2">
-            Search
-          </button>
-        </div>
-      </form>
-      <div>
-        {repos.map(repo => (
-          <Repository repo={repo} />
-        ))}
+  if (hasError) {
+    return (
+      <div className="container">
+        <form className="form-inline" onSubmit={getSearch}>
+          <div className="form-group">
+            <input value={search} onChange={updateSearch} />
+            <button type="submit" className="btn btn-primary">
+              Search
+            </button>
+          </div>
+        </form>
+        <h4>Error</h4>
       </div>
-    </div>
-  );
+    );
+  }
+
+  if (query) {
+    return (
+      <div className="container">
+        <form className="form-inline" onSubmit={getSearch}>
+          <div className="form-group">
+            <input value={search} onChange={updateSearch} />
+            <button type="submit" className="btn btn-primary">
+              Search
+            </button>
+          </div>
+        </form>
+        <div>
+          {repos.map(repo => (
+            <Repository repo={repo} key={repo.id} />
+          ))}
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="container">
+        <form className="form-inline" onSubmit={getSearch}>
+          <div className="form-group">
+            <input value={search} onChange={updateSearch} />
+            <button type="submit" className="btn btn-primary">
+              Search
+            </button>
+          </div>
+        </form>
+        <h4>Use search</h4>
+      </div>
+    );
+  }
 };
