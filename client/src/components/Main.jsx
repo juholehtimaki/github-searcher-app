@@ -66,7 +66,7 @@ export const Main = () => {
             <button type="submit">Search</button>
           </form>
         </div>
-        <div class="search-content-container">
+        <div className="search-content-container">
           <h3>{query}'s public repositories:</h3>
           {repos.map(repo => (
             <Repository repo={repo} key={repo.id} />
@@ -84,7 +84,7 @@ export const Main = () => {
             <button type="submit">Search</button>
           </form>
         </div>
-        <div class="search-content-container">
+        <div className="search-content-container">
           <h4>(begin the search by typing in someone's GitHub profile name)</h4>
         </div>
       </div>

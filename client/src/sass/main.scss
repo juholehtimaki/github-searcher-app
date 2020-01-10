@@ -6,10 +6,17 @@
     text-align: center;
   }
   .card {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 3px 6px #00000014, 0 3px 6px rgba(0, 0, 0, 0.15);
     margin-top: 0.5em;
     h4 {
       margin: 1em;
+    }
+    button {
+      width: 100%;
+      color: #3498db;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }

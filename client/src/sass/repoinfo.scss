@@ -27,6 +27,10 @@
   }
   button {
     margin-top: 0.5em;
+    color: #3498db;
     width: 100%;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

@@ -26,30 +26,30 @@ export const RepositoryInfo = () => {
     return (
       <div className="container repo-info-container">
         <div className="title-container">
-          <h1>{repositoryname}</h1>
+          <h1>{repositoryname}'s commits</h1>
         </div>
         <div className="commits-container">
           {commits.map(commit => (
             <Commit commit={commit} key={commit.sha} />
           ))}
         </div>
-        <button>
-          <Link to={"/"}>Back</Link>
-        </button>
+        <Link to={"/"}>
+          <button>Back</button>
+        </Link>
       </div>
     );
   } else {
     return (
       <div className="container repo-info-container">
         <div className="title-container">
-          <h1>{repositoryname}</h1>
+          <h1>{repositoryname}'s commits</h1>
         </div>
         <div className="commits-container">
           <h2>No commits were found</h2>
         </div>
-        <button>
-          <Link to={"/"}>Back</Link>
-        </button>
+        <Link to={"/"}>
+          <button>Back</button>
+        </Link>
       </div>
     );
   }
