@@ -1,9 +1,9 @@
-$background-color: #f2f2f5;
+@import "./vars.scss";
 
 footer {
   margin-top: 20px;
   width: 100%;
-  background: $background-color;
+  background: $footer-background-color;
   padding: 50px 0px 50px 0px;
   .copyright {
     text-align: left;

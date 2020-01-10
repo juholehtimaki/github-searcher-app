@@ -1,8 +1,16 @@
+@import "./vars.scss";
+
 .main-container {
   padding: 2em 0 2em 0;
   font-family: "Roboto", sans-serif;
   .search-container {
     margin-bottom: 1em;
+    button {
+      color: $button-text-color;
+      &:hover {
+        cursor: pointer;
+      }
+    }
   }
   .search-content-container {
     text-align: center;
@@ -11,14 +19,14 @@
     }
   }
   .card {
-    box-shadow: 0 3px 6px #00000014, 0 3px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: $box-shadow-default;
     margin-top: 0.5em;
     h4 {
       margin: 1em;
     }
     button {
       width: 100%;
-      color: #3498db;
+      color: $button-text-color;
       &:hover {
         cursor: pointer;
       }
