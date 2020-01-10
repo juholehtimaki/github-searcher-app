@@ -39,55 +39,28 @@ export const Main = () => {
         setHasError(true);
       });
   };
-  if (hasError) {
-    //Incase there was an error and user was not found
-    return (
-      <div className="container main-container">
-        <div className="row justify-content-center search-container">
-          <form className="form-inline search-form" onSubmit={getSearch}>
-            <input type="text" value={search} onChange={updateSearch} />
-            <button type="submit">Search</button>
-          </form>
-        </div>
-        <div className="search-content-container">
-          <h4>{query}'s GitHub profile was not found</h4>
-        </div>
+  return (
+    <div className="container main-container">
+      <div className="row justify-content-center search-container">
+        <form className="form-inline search-form" onSubmit={getSearch}>
+          <input type="text" value={search} onChange={updateSearch} />
+          <button type="submit">Search</button>
+        </form>
       </div>
-    );
-  }
-
-  if (query) {
-    //User was succesfully found
-    return (
-      <div className="container main-container">
-        <div className="row justify-content-center search-container">
-          <form className="form-inline search-form" onSubmit={getSearch}>
-            <input type="text" value={search} onChange={updateSearch} />
-            <button type="submit">Search</button>
-          </form>
-        </div>
-        <div className="search-content-container">
-          <h3>{query}'s public repositories:</h3>
-          {repos.map(repo => (
-            <Repository repo={repo} key={repo.id} />
-          ))}
-        </div>
+      <div className="search-content-container">
+        {hasError ? (
+          <h3>{query}'s GitHub profile was not found</h3>
+        ) : query && !hasError ? (
+          <>
+            <h3>{query}'s public repositories:</h3>
+            {repos.map(repo => (
+              <Repository repo={repo} key={repo.id} />
+            ))}
+          </>
+        ) : (
+          <h3>(begin the search by typing in someone's GitHub profile name)</h3>
+        )}
       </div>
-    );
-  } else {
-    //No query
-    return (
-      <div className="container main-container">
-        <div className="row justify-content-center search-container">
-          <form className="form-inline search-form" onSubmit={getSearch}>
-            <input type="text" value={search} onChange={updateSearch} />
-            <button type="submit">Search</button>
-          </form>
-        </div>
-        <div className="search-content-container">
-          <h4>(begin the search by typing in someone's GitHub profile name)</h4>
-        </div>
-      </div>
-    );
-  }
+    </div>
+  );
 };
