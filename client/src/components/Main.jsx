@@ -50,7 +50,7 @@ export const Main = () => {
       <div className="search-content-container">
         {hasError ? ( //If there was an error while fetching data
           <h3>{query}'s GitHub profile was not found</h3>
-        ) : query ? ( //If no errors rendering repositories or suggesting to begin the search
+        ) : query ? ( //If no errors and there's a query -> rendering repositories
           <>
             <h3>{query}'s public repositories:</h3>
             {repos.map(repo => (
@@ -58,6 +58,7 @@ export const Main = () => {
             ))}
           </>
         ) : (
+          //Else suggesting to begin the search
           <h3>(begin the search by typing in someone's GitHub profile name)</h3>
         )}
       </div>
