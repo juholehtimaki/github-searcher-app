@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
+import "../sass/repoinfo.scss";
 import { Commit } from "./Commit.jsx";
 
 export const RepositoryInfo = () => {
@@ -23,16 +24,14 @@ export const RepositoryInfo = () => {
 
   if (commits) {
     return (
-      <div>
-        <div>
+      <div className="container repo-info-container">
+        <div className="title-container">
           <h1>{repositoryname}</h1>
         </div>
-        <div>
-          <div>
-            {commits.map(commit => (
-              <Commit commit={commit} key={commit.sha} />
-            ))}
-          </div>
+        <div className="commits-container">
+          {commits.map(commit => (
+            <Commit commit={commit} key={commit.sha} />
+          ))}
         </div>
         <button>
           <Link to={"/"}>Back</Link>
@@ -41,13 +40,16 @@ export const RepositoryInfo = () => {
     );
   } else {
     return (
-      <div>
-        <div>
+      <div className="container repo-info-container">
+        <div className="title-container">
           <h1>{repositoryname}</h1>
         </div>
-        <div>
+        <div className="commits-container">
           <h2>No commits were found</h2>
         </div>
+        <button>
+          <Link to={"/"}>Back</Link>
+        </button>
       </div>
     );
   }
