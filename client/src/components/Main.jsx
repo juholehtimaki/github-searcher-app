@@ -8,13 +8,13 @@ export const Main = () => {
   const [repos, setRepos] = useState([]);
   const [search, setSearch] = useState("");
   const [hasError, setHasError] = useState(false);
-  const { query, setQuery } = useContext(QueryContext);
+  const { query, setQuery } = useContext(QueryContext); //storing query using useContext for easier navigation when going back from repositoryinfo view to main view
 
   useEffect(() => {
     if (query) {
       getRepos();
     }
-  }, [query]);
+  }, [query]); //rendering component when query changes
 
   const updateSearch = e => {
     setSearch(e.target.value);
