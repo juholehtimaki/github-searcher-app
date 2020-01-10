@@ -48,9 +48,9 @@ export const Main = () => {
         </form>
       </div>
       <div className="search-content-container">
-        {hasError ? (
+        {hasError ? ( //If there was an error while fetching data
           <h3>{query}'s GitHub profile was not found</h3>
-        ) : query && !hasError ? (
+        ) : query ? ( //If no errors rendering repositories or suggesting to begin the search
           <>
             <h3>{query}'s public repositories:</h3>
             {repos.map(repo => (

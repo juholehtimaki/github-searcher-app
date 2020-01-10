@@ -21,35 +21,26 @@ export const RepositoryInfo = () => {
     getCommits();
   }, [owner, repositoryname]);
 
-  if (commits) {
-    return (
-      <div className="container repo-info-container">
-        <div className="title-container">
-          <h3>{repositoryname}'s commits</h3>
-        </div>
-        <div className="commits-container">
-          {commits.map(commit => (
-            <Commit commit={commit} key={commit.sha} />
-          ))}
-        </div>
-        <Link to={"/"}>
-          <button>Back</button>
-        </Link>
+  return (
+    <div className="container repo-info-container">
+      <div className="title-container">
+        <h3>{repositoryname}'s commits</h3>
       </div>
-    );
-  } else {
-    return (
-      <div className="container repo-info-container">
-        <div className="title-container">
-          <h3>{repositoryname}'s commits</h3>
-        </div>
-        <div className="commits-container">
+      <div className="commits-container">
+        {commits.length > 0 ? ( //if there's commits rendering them
+          <>
+            {commits.map(commit => (
+              <Commit commit={commit} key={commit.sha} />
+            ))}
+          </>
+        ) : (
+          //no commits
           <h2>No commits were found</h2>
-        </div>
-        <Link to={"/"}>
-          <button>Back</button>
-        </Link>
+        )}
       </div>
-    );
-  }
+      <Link to={"/"}>
+        <button>Back</button>
+      </Link>
+    </div>
+  );
 };
