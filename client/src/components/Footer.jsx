@@ -1,19 +1,29 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import "../sass/footer.scss";
 
 export const Footer = () => {
   return (
-    <footer className="mt-5">
-      <Container fluid={true}>
-        <Row className="border-top justify-content-between p-3">
-          <Col className="p-0" md={3} sm={12}>
-            Vincit GitHub App
-          </Col>
-          <Col className="p-0 d-flex justify-content-end" md={3}>
-            Juho Lehtimäki
-          </Col>
-        </Row>
-      </Container>
+    <footer>
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-6 copyright">
+            <p>
+              Copyright ©<span> 2019 </span>Juho Lehtimäki
+            </p>
+          </div>
+          <div className="col-sm-6 social">
+            <a name="github-link" href="https://github.com/juholehtimaki">
+              <i className="fab fa-github" aria-hidden="true"></i>
+            </a>
+            <a
+              className="linkedi-lnik"
+              href="https://linkedin.com/in/juho-lehtimaki-32aa5819a"
+            >
+              <i className="fab fa-linkedin" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
     </footer>
   );
 };
