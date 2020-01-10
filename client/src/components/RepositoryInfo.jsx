@@ -11,7 +11,6 @@ export const RepositoryInfo = () => {
   useEffect(() => {
     const getCommits = () => {
       let url = `https://api.github.com/repos/${owner}/${repositoryname}/commits`;
-      console.log(url);
       axios
         .get(url)
         .then(res => {
@@ -26,7 +25,7 @@ export const RepositoryInfo = () => {
     return (
       <div className="container repo-info-container">
         <div className="title-container">
-          <h1>{repositoryname}'s commits</h1>
+          <h3>{repositoryname}'s commits</h3>
         </div>
         <div className="commits-container">
           {commits.map(commit => (
@@ -42,7 +41,7 @@ export const RepositoryInfo = () => {
     return (
       <div className="container repo-info-container">
         <div className="title-container">
-          <h1>{repositoryname}'s commits</h1>
+          <h3>{repositoryname}'s commits</h3>
         </div>
         <div className="commits-container">
           <h2>No commits were found</h2>

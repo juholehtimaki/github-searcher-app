@@ -1,9 +1,14 @@
 .main-container {
   padding: 2em 0 2em 0;
   font-family: "Roboto", sans-serif;
+  .search-container {
+    margin-bottom: 1em;
+  }
   .search-content-container {
-    padding: 2em 0 2em 0;
     text-align: center;
+    h3 {
+      margin: 1em 0 1em 0;
+    }
   }
   .card {
     box-shadow: 0 3px 6px #00000014, 0 3px 6px rgba(0, 0, 0, 0.15);
