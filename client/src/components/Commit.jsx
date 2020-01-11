@@ -2,7 +2,7 @@ import React from "react";
 import noImage from "../assets/no-image.png";
 
 export const Commit = ({ commit }) => {
-  let dateObject = new Date(commit.commit.author.date); //changing date to more readable f orm
+  let dateObject = new Date(commit.commit.author.date); //changing date to more readable form
   return (
     <div className="commit-container">
       <div className="image-container">
