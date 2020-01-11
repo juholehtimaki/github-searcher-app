@@ -7,7 +7,7 @@ import { QueryContext } from "./QueryContext.jsx";
 export const Main = () => {
   const [repos, setRepos] = useState([]);
   const [search, setSearch] = useState("");
-  const [hasError, setHasError] = useState(false); //error if user was not found
+  const [userNotFound, setUserNotFoud] = useState(false); //error if user was not found
   const { query, setQuery } = useContext(QueryContext); //storing query using useContext for easier navigation when going back from repositoryinfo view to main view
 
   useEffect(() => {
@@ -18,11 +18,11 @@ export const Main = () => {
           .get(url)
           .then(res => {
             setRepos(res.data);
-            setHasError(false);
+            setUserNotFoud(false);
           })
           .catch(e => {
             console.log(e);
-            setHasError(true);
+            setUserNotFoud(true);
           });
       };
       getRepos();
@@ -39,6 +39,28 @@ export const Main = () => {
     setSearch("");
   };
 
+  const userSearchResult = () => {
+    if (userNotFound) {
+      //if user was not found
+      return <h3>{query}'s GitHub profile was not found</h3>;
+    } else if (query) {
+      //if query exists, rendering user's repositories
+      return (
+        <>
+          <h3>{query}'s public repositories:</h3>
+          {repos.map(repo => (
+            <Repository repo={repo} key={repo.id} />
+          ))}
+        </>
+      );
+    } else {
+      //else suggesting user to begin the search
+      return (
+        <h3>(begin the search by typing in someone's GitHub profile name)</h3>
+      );
+    }
+  };
+
   return (
     <div className="container main-container">
       <div className="row justify-content-center search-container">
@@ -47,21 +69,7 @@ export const Main = () => {
           <button type="submit">Search</button>
         </form>
       </div>
-      <div className="search-content-container">
-        {hasError ? ( //If there was an error while fetching data
-          <h3>{query}'s GitHub profile was not found</h3>
-        ) : query ? ( //If no errors and there's a query -> rendering repositories
-          <>
-            <h3>{query}'s public repositories:</h3>
-            {repos.map(repo => (
-              <Repository repo={repo} key={repo.id} />
-            ))}
-          </>
-        ) : (
-          //Else suggesting to begin the search
-          <h3>(begin the search by typing in someone's GitHub profile name)</h3>
-        )}
-      </div>
+      <div className="search-content-container">{userSearchResult()}</div>
     </div>
   );
 };

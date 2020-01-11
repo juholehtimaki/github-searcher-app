@@ -21,23 +21,28 @@ export const RepositoryInfo = () => {
     getCommits();
   }, [owner, repositoryname]);
 
+  const repositorySearchResult = () => {
+    if (commits.length > 0) {
+      //if commits were found => returning them
+      return (
+        <>
+          {commits.map(commit => (
+            <Commit commit={commit} key={commit.sha} />
+          ))}
+        </>
+      );
+    } else {
+      //else letting user know that no commits were found
+      return <h2>No commits were found</h2>;
+    }
+  };
+
   return (
     <div className="container repo-info-container">
       <div className="title-container">
         <h3>{repositoryname}'s commits</h3>
       </div>
-      <div className="commits-container">
-        {commits.length > 0 ? ( //if there's commits rendering them
-          <>
-            {commits.map(commit => (
-              <Commit commit={commit} key={commit.sha} />
-            ))}
-          </>
-        ) : (
-          //no commits
-          <h2>No commits were found</h2>
-        )}
-      </div>
+      <div className="commits-container">{repositorySearchResult()}</div>
       <Link to={"/"}>
         <button>Back</button>
       </Link>
