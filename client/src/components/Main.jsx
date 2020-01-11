@@ -7,14 +7,27 @@ import { QueryContext } from "./QueryContext.jsx";
 export const Main = () => {
   const [repos, setRepos] = useState([]);
   const [search, setSearch] = useState("");
-  const [hasError, setHasError] = useState(false);
+  const [hasError, setHasError] = useState(false); //error if user was not found
   const { query, setQuery } = useContext(QueryContext); //storing query using useContext for easier navigation when going back from repositoryinfo view to main view
 
   useEffect(() => {
     if (query) {
+      const getRepos = () => {
+        let url = `https://api.github.com/users/${query}/repos`;
+        axios
+          .get(url)
+          .then(res => {
+            setRepos(res.data);
+            setHasError(false);
+          })
+          .catch(e => {
+            console.log(e);
+            setHasError(true);
+          });
+      };
       getRepos();
     }
-  }, [query]); //rendering component when query changes
+  }, [query]); //re-rendering component when query changes
 
   const updateSearch = e => {
     setSearch(e.target.value);
@@ -26,19 +39,6 @@ export const Main = () => {
     setSearch("");
   };
 
-  const getRepos = () => {
-    let url = `https://api.github.com/users/${query}/repos`;
-    axios
-      .get(url)
-      .then(res => {
-        setRepos(res.data);
-        setHasError(false);
-      })
-      .catch(e => {
-        console.log(e);
-        setHasError(true);
-      });
-  };
   return (
     <div className="container main-container">
       <div className="row justify-content-center search-container">
