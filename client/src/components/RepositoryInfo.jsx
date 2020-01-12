@@ -7,21 +7,28 @@ import { Commit } from "./Commit.jsx";
 export const RepositoryInfo = () => {
   let { owner, repositoryname } = useParams();
   const [commits, setCommits] = useState([]);
+  const [searchFinished, setSearchFinished] = useState(false);
 
   useEffect(() => {
     const getCommits = () => {
+      setSearchFinished(false);
       let url = `https://api.github.com/repos/${owner}/${repositoryname}/commits`;
       axios
         .get(url)
         .then(res => {
           setCommits(res.data.slice(0, 10)); //Getting only the last 10 commits
+          setSearchFinished(true);
         })
-        .catch(e => console.log(e));
+        .catch(e => {
+          console.log(e);
+          setSearchFinished(true);
+        });
     };
     getCommits();
   }, [owner, repositoryname]);
 
   const repositorySearchResult = () => {
+    if (!searchFinished) return; //not returning anything if search is not finished (loading indicator or spinner would work too)
     if (commits.length > 0) {
       //if commits were found => returning them
       return (

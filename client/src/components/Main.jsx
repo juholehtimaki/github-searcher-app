@@ -9,9 +9,11 @@ export const Main = () => {
   const [search, setSearch] = useState("");
   const [userNotFound, setUserNotFoud] = useState(false); //error if user was not found
   const { query, setQuery } = useContext(QueryContext); //storing query using useContext for easier navigation when going back from repositoryinfo view to main view
+  const [searchFinished, setSearchFinished] = useState(true);
 
   useEffect(() => {
     if (query) {
+      setSearchFinished(false);
       const getRepos = () => {
         let url = `https://api.github.com/users/${query}/repos`;
         axios
@@ -19,10 +21,12 @@ export const Main = () => {
           .then(res => {
             setRepos(res.data);
             setUserNotFoud(false);
+            setSearchFinished(true);
           })
           .catch(e => {
             console.log(e);
             setUserNotFoud(true);
+            setSearchFinished(true);
           });
       };
       getRepos();
@@ -40,6 +44,7 @@ export const Main = () => {
   };
 
   const userSearchResult = () => {
+    if (!searchFinished) return; //not returning anything if search is not finished (loading indicator or spinner would work too)
     if (userNotFound) {
       //if user was not found
       return <h3>{query}'s GitHub profile was not found</h3>;
