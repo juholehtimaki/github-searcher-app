@@ -31,7 +31,7 @@ export const Main = () => {
       };
       getRepos();
     }
-  }, [query]); //re-rendering component when query changes
+  }, [query]); //fetching repositories when query changes
 
   const updateSearch = e => {
     setSearch(e.target.value);
